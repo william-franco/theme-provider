@@ -11,8 +11,8 @@ class ThemeProvider with ChangeNotifier {
   static const _light = 'light';
   static const _system = 'system';
 
-  ThemeMode? _themeMode2;
-  ThemeMode? get getTheme => _themeMode2;
+  ThemeMode? _themeMode;
+  ThemeMode? get getTheme => _themeMode;
 
   ThemeProvider() {
     _initTheme();
@@ -23,13 +23,13 @@ class ThemeProvider with ChangeNotifier {
       log('Theme from storage: $value');
       var themeMode = value.isEmpty ? _light : value;
       if (themeMode == _light) {
-        _themeMode2 = ThemeMode.light;
+        _themeMode = ThemeMode.light;
       }
       if (themeMode == _dark) {
-        _themeMode2 = ThemeMode.dark;
+        _themeMode = ThemeMode.dark;
       }
       if (themeMode == _system) {
-        _themeMode2 = ThemeMode.system;
+        _themeMode = ThemeMode.system;
       }
       _debugProvider();
       notifyListeners();
@@ -37,27 +37,27 @@ class ThemeProvider with ChangeNotifier {
   }
 
   void setDarkTheme(themeMode) async {
-    _themeMode2 = themeMode;
+    _themeMode = themeMode;
     await _prefs.setString(_keyTheme, _dark);
     _debugProvider();
     notifyListeners();
   }
 
   void setLightTheme(themeMode) async {
-    _themeMode2 = themeMode;
+    _themeMode = themeMode;
     await _prefs.setString(_keyTheme, _light);
     _debugProvider();
     notifyListeners();
   }
 
   void setSystemTheme(themeMode) async {
-    _themeMode2 = themeMode;
+    _themeMode = themeMode;
     await _prefs.setString(_keyTheme, _system);
     _debugProvider();
     notifyListeners();
   }
 
   void _debugProvider() {
-    log('Theme mode: $_themeMode2');
+    log('Theme mode: $_themeMode');
   }
 }
