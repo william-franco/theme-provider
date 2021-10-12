@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +20,7 @@ class ThemeProvider with ChangeNotifier {
 
   void _initTheme() async {
     await _prefs.getString(_keyTheme).then((String value) {
-      print('Theme from storage: $value');
+      log('Theme from storage: $value');
       var themeMode = value.isEmpty ? _light : value;
       if (themeMode == _light) {
         _themeMode2 = ThemeMode.light;
@@ -56,6 +58,6 @@ class ThemeProvider with ChangeNotifier {
   }
 
   void _debugProvider() {
-    print('Theme mode: $_themeMode2');
+    log('Theme mode: $_themeMode2');
   }
 }
